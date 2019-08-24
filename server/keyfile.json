@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "hacktivgit-246407",
+    "private_key_id": "cb1519eaeb14f16a4cbe5f525ee7797694c25999",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDUf5yptI7FIywM\ngXxPoLfg2fDqyPu6/ydTz1MuUFqBcwXlcFDnnj/j2qc2JX6lW7fB12ZPPSE1mJ/S\ngy1AS5/OTBokoU8173cL+myTNwLHQB5cPAxYZtlNp1Qi5yjFTIT79yFjA/FDqonR\naN/uCEzKxIE792VOaRNvexoQ/iBQ0cPyGVW/QTgp5jmmi+JKN0zpudcpaug1MDkX\n4VEPY+R1N99y26qDWpyZniQg6gcl6FxHalp2QKC8SqRGX6orCVjTFlJJFiN/bmVz\naCMhDB7BRq6bMGMlrs+4M3eMon51t88yCDPPEbjqIJdla/rzaghLREp32gIi7Epl\nPRzd2yl9AgMBAAECggEAFoZsceTM2YLP8YdsSPiNZU1U515kqL7RSWYJuDgWT/CE\naHzOZq70sM+FuAyjbx3YzbhqhO3C7m5+So9TJaSejPyuLMHYpqv6n49tIPHM3pgi\nX76RxHEqibu6BHUicj+ZPShGJrvNQFH8h/EpA49nrHrGBDhGSdiDkeanrbNyc36H\nXeos21VX+AUzfhEt7TJWe5Doixw+n+LYWSprFb+bxlpCp9DxI/r7Nokb5yYaR1co\n/+zzM/2D16Zx8lKa8BtbWX4auxR+F84VBBI1TKRJImF++hYLMpdyylOgQi0aSugL\nlaDIzH7bbWStNs0YjBCHiTXR5/IXqNj7FZrljgqqFQKBgQDyWN8NzYtRuuaiFokn\nogtpkwy+4N644fMcNGn97AJdnOpRjsAkNz2uO05MncLmnpCVfVO3J6H1+/LBMl1/\nyN0tjMqO5ubhiHLXbcPK7GbERJYsyRyBuz2cWwm347woVgIUiZzslQsXGgS7VjhB\nntIh+m7n6n8BH++Sg3BpsufUSwKBgQDgeENtqQi6kXKCeWWGf+vHtEx4Dpb0eF3d\nP1fFhA0L1vAsyY2deqaPdaBYCYJjzR8Wh9VMHwT4UL/k0ZVpCjMd8LZmcJ8qhFWf\ntGDlBEbNsZ7OQ4oWFqhHKTBJVx2FZxOkj0YBt2deCSZEEhChJpB4eWSLbY25hiax\nhayY5UuMVwKBgHJQ3ZajOG6rHROkUboyQ/Pe+4omhKjtXEIXr0+pvkvuMtGZ5qSu\nshe3ve2CFWe3sDfz0EN7HHjuCcp8OYKHe117JilWXd5RAOsByfO0o509RSGHFD1V\n13AjuWfWsvDL8VtCtpUakQqqqUS9HPhHNJP2j84x3Qrox5dzDNmvHJAVAoGARxBL\n6I+3H7mkUwIzzhz5fEPsYaXczJC+xqijFPj1WGY3qzY0C0MlMA3BMZ3xFb9+tBdU\nw8CeRi7qUXq4noSIIlZuqIfHHCLBKMpmUprD/6LX790Z/lw18jFsBAv8YJt9cH+b\nXje+Fds3rh05/orC+iEUX7/TOoTqAxGaztzoygkCgYAlWyWwEMxn/oxy5ca/YPte\ntKJnU6rBGiY61+BdA3AobX8Ht0JewVC/5bi75uuRumAG47Ac8pBjzv0WssNIsvhe\nVXRAfFoGzFFaLZpDCptUie2bFoIWCcG1uB3qKWgGcXS1/F0ywEIaR1xNY6+TdLgb\nNrOhttpm/oY/4Xb3GJNoYw==\n-----END PRIVATE KEY-----\n",
+    "client_email": "mini-wp@hacktivgit-246407.iam.gserviceaccount.com",
+    "client_id": "108873029656159521853",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mini-wp%40hacktivgit-246407.iam.gserviceaccount.com"
+}
