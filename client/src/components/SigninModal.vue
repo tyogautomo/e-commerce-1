@@ -26,7 +26,7 @@ export default {
     // ...mapActions(["signIn"])
     signIn(payload) {
       this.$store.dispatch('signIn', payload)
-      // this.$router.push('/dashboard')
+      this.$router.push('/products')
     }
   }
 };

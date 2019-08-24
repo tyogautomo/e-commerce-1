@@ -1,34 +1,86 @@
 <template>
   <div class="product-card mr-4 mb-3">
-    <div class="product-image" :style="{ backgroundImage: 'url(' + featured_image + ')' }">
+    <div class="product-image" :style="{ backgroundImage: 'url(' + product.featured_image + ')' }">
       <div class="layer d-flex justify-content-around align-items-center">
-        <a href @click.prevent="toDetailProduct('1')">
-          <i class="fas fa-info-circle"></i>
+        <a href @click.prevent="toDetailProduct(product._id)">
+          <i class="fas fa-info-circle userbuy"></i>
         </a>
-        <a href>
-          <i class="fas fa-cart-plus"></i>
+        <a href @click.prevent="addCart(product._id)">
+          <i class="fas fa-cart-plus userbuy"></i>
         </a>
       </div>
     </div>
-    <div class="product-info d-flex flex-column align-items-start">
-      <h5 class="product-name">Product Name</h5>
-      <small>$ 40</small>
-      <small>Quantity: 100</small>
+    <div class="content-info d-flex justify-content-between">
+      <div class="product-info d-flex flex-column align-items-start col-9">
+        <h5 class="product-name">{{product.name}}</h5>
+        <small>{{toDollar}}</small>
+        <small>Quantity: {{product.quantity}}</small>
+      </div>
+      <div class="options col-3 d-flex flex-column align-items-center justify-content-between">
+        <a
+          href
+          class="edit"
+          v-b-modal.edit-product
+          @click.prevent="editProduct(product._id)"
+          v-show="username == 'admin'"
+        >
+          <i class="fas fa-edit"></i>
+        </a>
+        <a
+          href
+          class="delete"
+          @click.prevent="deleteProduct(product._id)"
+          v-show="username == 'admin'"
+        >
+          <i class="fas fa-minus-square"></i>
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Swal from "sweetalert2";
+import { mapState } from "vuex";
+
 export default {
+  props: ["product"],
   data() {
-    return {
-      featured_image: "http://cubegaming.id/wp-content/uploads/2019/08/2.png"
-    };
+    return {};
   },
   methods: {
     toDetailProduct(id) {
       this.$store.state.isDetailProduct = true;
-      this.$router.push(`/dashboard/product/${id}`);
+      this.$router.push(`/products/${id}`);
+    },
+    deleteProduct(id) {
+      Swal.fire({
+        title: "Delete this product?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.$store.dispatch("deleteProduct", id);
+        }
+      });
+    },
+    editProduct(id) {
+      this.$router.push(`/products/edit/${id}`);
+    },
+    addCart(id) {
+      // console.log(id);
+      this.$store.dispatch("addCart", id);
+      this.$alertify.success("Item added to cart");
+    }
+  },
+  computed: {
+    ...mapState(["username"]),
+    toDollar() {
+      return `$ ${this.product.price}`;
     }
   }
 };
@@ -44,7 +96,7 @@ div.product-card {
   transition: 0.2s;
 }
 
-.fas {
+.userbuy {
   color: white;
   opacity: 0;
   transition: opacity 0.3s linear;
@@ -56,7 +108,7 @@ div.product-card {
   transition: 0.2s;
 }
 
-.fas:hover {
+.userbuy:hover {
   top: -3px;
   background-color: rgba(0, 0, 0, 0.664);
 }
@@ -66,7 +118,7 @@ div.product-card:hover {
   box-shadow: 0 5px 8px rgba(0, 0, 0, 0.336);
 }
 
-div.product-card:hover .fas {
+div.product-card:hover .userbuy {
   opacity: 1;
 }
 
@@ -107,5 +159,16 @@ div.product-info {
   padding: 10px;
   background-color: rgb(207, 207, 207);
   border-radius: 0 0 5px 5px;
+}
+
+div.options {
+  padding: 10px;
+  background-color: rgb(207, 207, 207);
+}
+.edit {
+  color: rgb(126, 151, 89);
+}
+.delete {
+  color: rgb(190, 105, 105);
 }
 </style>

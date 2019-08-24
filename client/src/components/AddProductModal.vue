@@ -36,9 +36,17 @@
           </div>
         </div>
       </form>
-      <div slot="modal-footer">
-        <button type="submit" class="btn btn-primary mr-2" form="form-create">Submit</button>
-        <button class="btn btn-danger" @click.prevent="closeModal()">Close</button>
+      <div slot="modal-footer" class="d-flex">
+        <div class="loading mr-4" v-show="isLoading">
+          <b-spinner variant="primary" type="grow"></b-spinner>
+          <b-spinner variant="danger" type="grow"></b-spinner>
+          <b-spinner variant="warning" type="grow"></b-spinner>
+          <span class="info mr-2">Adding new product ...</span>
+        </div>
+        <div class="button">
+          <button type="submit" class="btn btn-primary mr-2" form="form-create">Submit</button>
+          <button class="btn btn-danger" @click.prevent="closeModal()">Close</button>
+        </div>
       </div>
     </b-modal>
   </div>
@@ -46,6 +54,7 @@
 
 <script>
 import axios from "@/apis/server.js";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -56,7 +65,8 @@ export default {
         price: 0,
         quantity: 0,
         featured_image: ""
-      }
+      },
+      isLoading: false
     };
   },
   methods: {
@@ -68,6 +78,7 @@ export default {
       this.formAddProduct.featured_image = "";
     },
     addProduct() {
+      this.isLoading = true;
       let formData = new FormData();
       formData.append("name", this.formAddProduct.name);
       formData.append("description", this.formAddProduct.description);
@@ -85,7 +96,15 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log(data);
+          this.$bvModal.hide("add-product");
+          this.isLoading = false;
+          console.log(data, "from add product vue");
+          Swal.fire({
+            type: "success",
+            title: "Successfuly add a Product!",
+            text: "Your new product now listed in product list"
+          });
+          this.$store.dispatch("getAllProducts");
         })
         .catch(err => {
           console.log(err);

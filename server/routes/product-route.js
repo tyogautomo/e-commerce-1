@@ -9,8 +9,8 @@ const {
 const ProductController = require('../controllers/product-controller')
 
 router.get('/', ProductController.getAll)
-
 router.post('/', auth.authorizationAdmin, multer.single('image'), sendUploadToGCS, ProductController.create)
+router.get('/:productId', ProductController.getOne)
 router.put('/:productId', auth.authorizationAdmin, multer.single('image'), sendUploadToGCS, ProductController.update)
 router.delete('/:productId', auth.authorizationAdmin, ProductController.delete)
 

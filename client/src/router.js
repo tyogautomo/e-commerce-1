@@ -13,17 +13,24 @@ export default new Router({
       component: Home
     },
     {
-      path: '/dashboard',
+      path: '/products',
       component: () => import( /* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
       children: [{
-        path: '',
-        name: 'content',
-        component: () => import( /* webpackChunkName: "content" */ '@/components/Content.vue')
-      }, {
-        path: 'product/:productId',
-        name: 'productdetail',
-        component: () => import( /* webpackChunkName: "productdetail" */ '@/views/DetailProduct.vue')
-      }]
+          path: '',
+          name: 'products',
+          component: () => import( /* webpackChunkName: "products" */ '@/components/Content.vue'),
+        },
+        {
+          path: ':id',
+          name: 'detail',
+          component: () => import( /* webpackChunkName: "detail" */ '@/views/DetailProduct.vue'),
+        },
+        {
+          path: 'edit/:id',
+          name: 'edit',
+          component: () => import( /* webpackChunkName: "edit" */ '@/components/EditProduct.vue')
+        }
+      ]
     },
     {
       path: '/cart',

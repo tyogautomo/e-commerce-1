@@ -3,7 +3,7 @@
     <Sidebar class="col-2"></Sidebar>
     <!-- <Content class="col-10" v-if="!$store.state.isDetailProduct"></Content> -->
     <transition name="fade">
-      <router-view class="col-10"></router-view>
+      <router-view class="col-10 ml-auto"></router-view>
     </transition>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 .fade-enter-active {
-  transition: opacity 2s;
+  transition: opacity 1s;
 }
 .fade-enter {
   opacity: 0;

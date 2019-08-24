@@ -1,6 +1,6 @@
 module.exports = {
     errorHandler(err, req, res, next) {
-        // console.log(err, 'from error handler <<<<<<<<')
+        console.log(err, 'from error handler <<<<<<<<')
         if (err.name == 'JsonWebTokenError') {
             res.status(401).json({
                 code: 401,

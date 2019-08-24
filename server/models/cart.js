@@ -6,12 +6,14 @@ const cartSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    productId: [{
+    products: [{
         type: Schema.Types.ObjectId,
         ref: 'Product'
     }],
     paymentStatus: Boolean,
     deliveryStatus: Boolean
+},{
+    versionKey: false
 })
 
 const Cart = mongoose.model('Cart', cartSchema)

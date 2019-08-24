@@ -2,7 +2,7 @@
   <div class="sidebar d-flex flex-column">
     <div class="user-profile"></div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item" v-if="true">
+      <li class="list-group-item" v-if="username == 'admin'">
         <i class="fas fa-plus-square"></i>
         <a
           href
@@ -13,7 +13,10 @@
           v-b-modal.add-product
         >Add Product</a>
       </li>
-      <li class="list-group-item d-flex align-items-center justify-content-start" v-if="true">
+      <li
+        class="list-group-item d-flex align-items-center justify-content-start"
+        v-if="username !== 'admin'"
+      >
         <div class="cart-menu col-9">
           <i class="fas fa-shopping-cart"></i>
           <router-link to="/cart">
@@ -21,12 +24,12 @@
           </router-link>
         </div>
         <div class="col-3">
-          <span class="amount">0</span>
+          <span class="amount">{{cartsProducts.length}}</span>
         </div>
       </li>
       <li class="list-group-item">
         <i class="fas fa-desktop"></i>
-        <router-link to="/dashboard">
+        <router-link to="/products">
           <a href>Products</a>
         </router-link>
       </li>
@@ -41,10 +44,17 @@
 
 <script>
 import AddProductForm from "@/components/AddProductModal.vue";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
     AddProductForm
+  },
+  computed: {
+    ...mapState(["username", 'cartsProducts'])
+  },
+  created() {
+    this.$store.dispatch("getUserCarts");
   }
 };
 </script>

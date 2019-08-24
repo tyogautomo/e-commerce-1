@@ -26,7 +26,7 @@ export default {
     // ...mapActions(["signUp"])
     signUp(payload) {
       this.$store.dispatch("signUp", payload);
-      // this.$router.push("/dashboard");
+      this.$router.push("/products");
     }
   }
 };

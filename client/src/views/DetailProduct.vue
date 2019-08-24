@@ -1,14 +1,14 @@
 <template>
-  <div class="product-detail ml-auto pt-4 d-flex flex-column p-0">
-    <div class="detail-image align-self-center" :style="{ backgroundImage: 'url(' + image + ')' }"></div>
+  <div class="product-detail pt-4 d-flex flex-column p-0">
+    <div class="detail-image align-self-center" :style="{ backgroundImage: 'url(' + product.featured_image + ')' }"></div>
     <div class="info-detail d-flex flex-column align-items-start">
-      <h1 class="detail-name mb-5 align-self-center">Aurus</h1>
-      <h4>Price: $ 40</h4>
-      <h4>Quantity: 120</h4>
+      <h1 class="detail-name mb-5 align-self-center">{{product.name}}</h1>
+      <h4>Price: {{toDollar}}</h4>
+      <h4>Quantity: {{product.quantity}}</h4>
       <br />
       <p
         class="detail-desc"
-      >Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus ipsam autem iure aperiam rerum nisi maiores omnis dolorem nulla cupiditate. Possimus ipsam autem iure aperiam rerum nisi maiores omnis dolorem nulla cupiditate.</p>
+      >{{product.description}}</p>
       <br />
       <h3>Specification</h3>
       <Specification></Specification>
@@ -26,6 +26,19 @@ export default {
     return {
       image: "http://cubegaming.id/wp-content/uploads/2019/08/2.png"
     };
+  },
+  computed: {
+    product() {
+      return this.$store.state.product;
+    },
+    toDollar() {
+      return `$ ${this.product.price}`;
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.$store.dispatch("getOneProduct", to.params.id);
+    });
   }
 };
 </script>

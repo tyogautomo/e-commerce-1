@@ -1,4 +1,11 @@
 const Product = require('../models/product')
+const {
+    Storage
+} = require('@google-cloud/storage')
+const storage = new Storage({
+    projectId: process.env.GCLOUD_PROJECT,
+    keyFilename: process.env.KEYFILE_PATH
+})
 
 class ProductController {
 
@@ -6,6 +13,14 @@ class ProductController {
         Product.find()
             .then(products => {
                 res.status(200).json(products)
+            })
+            .catch(next)
+    }
+
+    static getOne(req, res, next) {
+        Product.findById(req.params.productId)
+            .then(product => {
+                res.status(200).json(product)
             })
             .catch(next)
     }
@@ -39,6 +54,17 @@ class ProductController {
             req.body.amount && (update.amount = req.body.amount)
             req.file && (update.featured_image = req.file.cloudStoragePublicUrl)
 
+            // deleting old image on gsc if updating new image
+            if (req.file) {
+                let willUpdated =
+                    await Product.findById(req.params.productId)
+
+                await storage
+                    .bucket('ecommerce-cubes')
+                    .file(willUpdated.featured_image.split('https://storage.googleapis.com/ecommerce-cubes/')[1])
+                    .delete()
+            }
+
             let updatedProduct =
                 await Product.findOneAndUpdate({
                     _id: req.params.productId
@@ -61,6 +87,12 @@ class ProductController {
                 await Product.findOneAndDelete({
                     _id: req.params.productId
                 })
+
+
+            await storage
+                .bucket('ecommerce-cubes')
+                .file(deletedProduct.featured_image.split('https://storage.googleapis.com/ecommerce-cubes/')[1])
+                .delete()
 
             res.status(200).json(deletedProduct)
         } catch (error) {
