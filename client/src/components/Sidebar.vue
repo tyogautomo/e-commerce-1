@@ -33,6 +33,18 @@
           <a href>Products</a>
         </router-link>
       </li>
+      <li class="list-group-item" v-if="username == 'admin'">
+        <i class="fas fa-exchange-alt"></i>
+        <router-link to="/admin/transaction">
+          <a href>All Transaction</a>
+        </router-link>
+      </li>
+      <li class="list-group-item" v-if="username !== 'admin'">
+        <i class="fas fa-exchange-alt"></i>
+        <router-link to="/user/transaction">
+          <a href>Transaction</a>
+        </router-link>
+      </li>
       <li class="list-group-item d-flex align-items-center">
         <i class="fas fa-sign-out-alt"></i>
         <a href @click.prevent="logout">Logout</a>
@@ -51,7 +63,7 @@ export default {
     AddProductForm
   },
   computed: {
-    ...mapState(["username", 'cartsProducts'])
+    ...mapState(["username", "cartsProducts"])
   },
   created() {
     this.$store.dispatch("getUserCarts");

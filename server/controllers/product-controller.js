@@ -51,7 +51,7 @@ class ProductController {
             req.body.name && (update.name = req.body.name)
             req.body.description && (update.description = req.body.description)
             req.body.price && (update.price = req.body.price)
-            req.body.amount && (update.amount = req.body.amount)
+            req.body.quantity && (update.quantity = req.body.quantity)
             req.file && (update.featured_image = req.file.cloudStoragePublicUrl)
 
             // deleting old image on gsc if updating new image

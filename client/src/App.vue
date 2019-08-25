@@ -15,7 +15,7 @@ export default {
   },
   created() {
     if (localStorage.getItem("token")) {
-      this.$store.commit("signin"); 
+      this.$store.commit("signin");
     }
   }
 };

@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard d-flex">
     <Sidebar class="col-2"></Sidebar>
-    <!-- <Content class="col-10" v-if="!$store.state.isDetailProduct"></Content> -->
     <transition name="fade">
       <router-view class="col-10 ml-auto"></router-view>
     </transition>

@@ -12,6 +12,11 @@ export default {
   components: {
     LandingPage,
     Dashboard
+  },
+  created() {
+    if (localStorage.getItem("token")) {
+      this.$router.push("/products");
+    }
   }
 };
 </script>

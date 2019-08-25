@@ -12,8 +12,9 @@ const cartSchema = new Schema({
     }],
     paymentStatus: Boolean,
     deliveryStatus: Boolean
-},{
-    versionKey: false
+}, {
+    versionKey: false,
+    timestamps: true
 })
 
 const Cart = mongoose.model('Cart', cartSchema)

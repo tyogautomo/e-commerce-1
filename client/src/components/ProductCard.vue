@@ -5,7 +5,7 @@
         <a href @click.prevent="toDetailProduct(product._id)">
           <i class="fas fa-info-circle userbuy"></i>
         </a>
-        <a href @click.prevent="addCart(product._id)">
+        <a href @click.prevent="addCart(product._id)" v-if="username != 'admin'">
           <i class="fas fa-cart-plus userbuy"></i>
         </a>
       </div>
