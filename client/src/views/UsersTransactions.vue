@@ -60,6 +60,17 @@ export default {
       this.isSelectingOngoing = true;
       this.$router.push("/admin/transaction/ongoing");
     }
+  },
+  created() {
+    if (this.$route.fullPath == "/admin/transaction/arrived") {
+      this.isSelectingAll = false;
+      this.isSelectingArrived = true;
+      this.isSelectingOngoing = false;
+    } else if (this.$route.fullPath == "/admin/transaction/ongoing") {
+      this.isSelectingAll = false;
+      this.isSelectingArrived = false;
+      this.isSelectingOngoing = true;
+    }
   }
 };
 </script>

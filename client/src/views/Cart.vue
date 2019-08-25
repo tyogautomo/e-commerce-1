@@ -2,12 +2,18 @@
   <div class="cart d-flex">
     <Sidebar class="col-2"></Sidebar>
     <div class="cart-list-container col-10 ml-auto d-flex flex-column">
-      <div class="title d-flex align-items-center justify-content-center mb-5">
-        <i class="fas fa-shopping-cart mr-3"></i>
+      <div class="title d-flex align-items-center justify-content-start mb-5 align-self-start">
         <h1>Cart</h1>
       </div>
-      <div class="before-checkout d-flex">
-        <div class="cart-list col-7">
+      <div class="before-checkout d-flex justify-content-center">
+        <div
+          class="no-carts col-6 d-flex align-items-center justify-content-start p-0"
+          v-if="!(carts.length > 0)"
+          :style="{ backgroundImage: 'url(' + noCartImage + ')' }"
+        >
+          <h2 class="no-item-text">No items in your cart now ....</h2>
+        </div>
+        <div class="cart-list col-7" v-if="carts.length > 0">
           <CartCard
             v-for="item in carts"
             :key="item.id"
@@ -16,7 +22,7 @@
             @update-amount="updateAmount"
           />
         </div>
-        <div class="total col-5 d-flex flex-column">
+        <div class="total col-5 d-flex flex-column" v-if="carts.length > 0">
           <h2 class="mb-5">Cart Summary :</h2>
           <!-- SUMARRY LIST -->
           <div class="summary-list justify-content-start" v-for="item in carts" :key="item.id">
@@ -59,7 +65,8 @@ export default {
   data() {
     return {
       carts: [],
-      cartId: ""
+      cartId: "",
+      noCartImage: "https://svgshare.com/i/EgK.svg"
     };
   },
   methods: {
@@ -161,13 +168,20 @@ export default {
 </script>
 
 <style scoped>
+.no-carts {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+}
+
 .cart-list-container {
   padding-top: 30px;
   background-color: rgb(218, 218, 218);
 }
 
 .title {
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.521);
+  width: 50%;
+  border-bottom: 3px solid rgb(44, 62, 80);
 }
 h1 {
   font-family: "Oswald";
@@ -176,6 +190,13 @@ h1 {
 
 h2 {
   font-family: "Oswald";
+}
+
+h2.no-item-text {
+  font-family: "Oswald";
+  font-size: 40px;
+  position: relative;
+  top: -40px;
 }
 
 .fa-shopping-cart {

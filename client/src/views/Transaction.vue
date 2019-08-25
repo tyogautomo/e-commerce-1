@@ -8,6 +8,13 @@
         <h1 class="m-0 mb-2">Transactions</h1>
       </div>
       <div
+        class="no-trans-image"
+        :style="{ backgroundImage: 'url(' + noTransImage + ')' }"
+        v-if="compiledTransactions.length == 0"
+      >
+        <h2 class="no-trans-text">Seems like you have no any transactions ...</h2>
+      </div>
+      <div
         class="transaction-card d-flex mb-3"
         v-for="trans in compiledTransactions"
         :key="trans.id"
@@ -31,14 +38,14 @@
         </div>
         <!-- user options -->
         <div class="user-options col-3 p-3">
-          <p>Please verify your delivery order</p>
+          <p>Please verify your delivery order when arrived</p>
           <button
             class="btn btn-success"
             v-if="!trans.deliveryStatus"
             @click="verify(trans.id)"
           >Verify Delivery</button>
           <button class="btn btn-success" v-if="trans.deliveryStatus" disabled>
-            Delivered
+            Arrived
             <i class="fas fa-check"></i>
           </button>
         </div>
@@ -54,6 +61,11 @@ import { mapGetters } from "vuex";
 export default {
   components: {
     Sidebar
+  },
+  data() {
+    return {
+      noTransImage: "https://svgshare.com/i/EfX.svg"
+    };
   },
   methods: {
     getUserTransactions() {
@@ -74,6 +86,12 @@ export default {
 </script>
 
 <style scoped>
+.no-trans-image {
+  width: 55%;
+  height: 510px;
+  background-size: cover;
+}
+
 .main-title {
   border-bottom: 2px solid rgb(17, 47, 68);
 }
@@ -89,6 +107,10 @@ small,
 p,
 button,
 .name {
+  font-family: "Oswald";
+}
+
+h2.no-trans-text {
   font-family: "Oswald";
 }
 

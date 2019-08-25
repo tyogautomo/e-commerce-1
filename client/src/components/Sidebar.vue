@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar d-flex flex-column">
     <div class="user-profile"></div>
+    <h3 class="username">{{username}}</h3>
     <ul class="list-group list-group-flush">
       <li class="list-group-item" v-if="username == 'admin'">
         <i class="fas fa-plus-square"></i>
@@ -45,10 +46,10 @@
           <a href>Transaction</a>
         </router-link>
       </li>
-      <li class="list-group-item d-flex align-items-center">
+      <!-- <li class="list-group-item d-flex align-items-center">
         <i class="fas fa-sign-out-alt"></i>
-        <a href @click.prevent="logout">Logout</a>
-      </li>
+        <a href @click.prevent="logout">Signout</a>
+      </li>-->
     </ul>
     <AddProductForm></AddProductForm>
   </div>
@@ -63,7 +64,10 @@ export default {
     AddProductForm
   },
   computed: {
-    ...mapState(["username", "cartsProducts"])
+    ...mapState(["username", "cartsProducts"]),
+    username() {
+      return localStorage.getItem("username");
+    }
   },
   created() {
     this.$store.dispatch("getUserCarts");
@@ -82,7 +86,9 @@ export default {
   padding-top: 100%;
   margin-bottom: 20px;
 }
-
+.username {
+  color: white;
+}
 div.sidebar {
   background-image: url("../assets/diamonds.png");
 }
