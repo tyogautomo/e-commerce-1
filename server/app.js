@@ -27,6 +27,11 @@ app.use(express.urlencoded({
 
 const routes = require('./routes/index-route')
 
+app.get('/', (req, res) => {
+    res.send({
+        message: 'Welcome to CUBES Server!'
+    })
+})
 app.use('/', routes)
 
 app.use(errorHandler)
