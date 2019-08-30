@@ -32,12 +32,12 @@ class ProductController {
             description: req.body.description,
             price: req.body.price,
             quantity: req.body.quantity,
-            featured_image: req.file.cloudStoragePublicUrl
+            featured_image: "url"
         }
+
         if (req.file) {
             product.featured_image = req.file.cloudStoragePublicUrl
         }
-        console.log(product, 'masuk create controller <<<<<<<<<<<<<<<<<<<<<<')
 
         Product.create(product)
             .then(product => {
@@ -70,11 +70,11 @@ class ProductController {
                 await Product.findOneAndUpdate({
                     _id: req.params.productId
                 }, {
-                    $set: update
-                }, {
-                    new: true,
-                    runValidators: true
-                })
+                        $set: update
+                    }, {
+                        new: true,
+                        runValidators: true
+                    })
 
             res.status(200).json(updatedProduct)
         } catch (error) {
@@ -89,11 +89,12 @@ class ProductController {
                     _id: req.params.productId
                 })
 
-
-            await storage
-                .bucket('ecommerce-cubes')
-                .file(deletedProduct.featured_image.split('https://storage.googleapis.com/ecommerce-cubes/')[1])
-                .delete()
+            if (deletedProduct.featured_image != 'url') {
+                await storage
+                    .bucket('ecommerce-cubes')
+                    .file(deletedProduct.featured_image.split('https://storage.googleapis.com/ecommerce-cubes/')[1])
+                    .delete()
+            }
 
             res.status(200).json(deletedProduct)
         } catch (error) {

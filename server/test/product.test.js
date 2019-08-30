@@ -111,7 +111,7 @@ describe('Product Testing', function () {
                 name: 'product-1',
                 description: 'description of product 1',
                 price: 1200000,
-                amount: 100,
+                quantity: 100,
                 featured_image: 'exist'
             }
 
@@ -136,7 +136,7 @@ describe('Product Testing', function () {
                 name: 'product-1',
                 description: 'description of product 1',
                 price: 1200000,
-                amount: 100,
+                quantity: 100,
             }
 
             chai
@@ -147,17 +147,17 @@ describe('Product Testing', function () {
                 .field('name', product1.name)
                 .field('description', product1.description)
                 .field('price', product1.price)
-                .field('amount', product1.amount)
+                .field('quantity', product1.quantity)
                 .end(function (err, res) {
                     createdProduct = res.body
                     expect(err).to.be.null
                     expect(res).to.have.status(201)
                     expect(res).to.be.an('object')
-                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'amount', 'price', 'featured_image'])
+                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'quantity', 'price', 'featured_image', 'createdAt', 'updatedAt'])
                     expect(res.body.name).to.equal(product1.name)
                     expect(res.body.description).to.equal(product1.description)
                     expect(res.body.price).to.equal(product1.price)
-                    expect(res.body.amount).to.equal(product1.amount)
+                    expect(res.body.quantity).to.equal(product1.quantity)
                     done()
 
                 })
@@ -168,7 +168,7 @@ describe('Product Testing', function () {
                 name: 'product-1',
                 description: 'description of product 1',
                 price: 1200000,
-                amount: 100,
+                quantity: 100,
                 featured_image: 'exist'
             }
 
@@ -192,7 +192,7 @@ describe('Product Testing', function () {
             let product1 = {
                 description: 'description of product 1',
                 price: 1200000,
-                amount: 100,
+                quantity: 100,
             }
 
             chai
@@ -205,7 +205,7 @@ describe('Product Testing', function () {
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.all.keys(['code', 'message'])
                     expect(res.body.code).to.equal(400)
-                    expect(res.body.message).to.equal('Product validation failed: name: Path `name` is required.')
+                    expect(res.body.message).to.equal('<p> Path `name` is required.</p>')
                     done()
 
                 })
@@ -217,7 +217,7 @@ describe('Product Testing', function () {
                 name: 'product1',
                 description: 'description of product 1',
                 price: -1,
-                amount: 100,
+                quantity: 100,
             }
 
             chai
@@ -230,20 +230,20 @@ describe('Product Testing', function () {
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.all.keys(['code', 'message'])
                     expect(res.body.code).to.equal(400)
-                    expect(res.body.message).to.equal('Product validation failed: price: Price cannot less than 0.')
+                    expect(res.body.message).to.equal('<p> Price cannot less than 0.</p>')
                     done()
 
                 })
 
         })
 
-        it('should error: Amount cannot < 0 when created', function (done) {
+        it('should error: quantity cannot < 0 when created', function (done) {
 
             let product1 = {
                 name: 'product1',
                 description: 'description of product 1',
                 price: 1231231,
-                amount: -1,
+                quantity: -1,
             }
 
             chai
@@ -256,7 +256,7 @@ describe('Product Testing', function () {
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.all.keys(['code', 'message'])
                     expect(res.body.code).to.equal(400)
-                    expect(res.body.message).to.equal('Product validation failed: amount: This product is out of stock.')
+                    expect(res.body.message).to.equal('<p> This product is out of stock.</p>')
                     done()
 
                 })
@@ -280,12 +280,12 @@ describe('Product Testing', function () {
                     updatedProduct = res.body
                     expect(err).to.be.null
                     expect(res.body).to.be.an('object')
-                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'price', 'amount', 'featured_image'])
+                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'price', 'quantity', 'featured_image', 'createdAt', 'updatedAt'])
                     expect(res.body.name).to.not.equal(createdProduct.name)
                     expect(res.body.name).to.equal(update.name)
                     expect(res.body.description).to.equal(createdProduct.description)
                     expect(res.body.price).to.equal(createdProduct.price)
-                    expect(res.body.amount).to.equal(createdProduct.amount)
+                    expect(res.body.quantity).to.equal(createdProduct.quantity)
                     expect(res.body.featured_image).to.equal(createdProduct.featured_image)
                     done()
                 })
@@ -328,15 +328,15 @@ describe('Product Testing', function () {
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.all.keys(['code', 'message'])
                     expect(res.body.code).to.equal(400)
-                    expect(res.body.message).to.equal('Validation failed: price: Price cannot less than 0.')
+                    expect(res.body.message).to.equal('<p> Price cannot less than 0.</p>')
                     done()
                 })
         })
 
-        it('should error updating a product: Amount cannot be less than 0', function (done) {
+        it('should error updating a product: quantity cannot be less than 0', function (done) {
             // console.log(createdProduct)
             let update = {
-                amount: -1
+                quantity: -1
             }
             chai
                 .request(app)
@@ -349,7 +349,7 @@ describe('Product Testing', function () {
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.all.keys(['code', 'message'])
                     expect(res.body.code).to.equal(400)
-                    expect(res.body.message).to.equal('Validation failed: amount: This product is out of stock.')
+                    expect(res.body.message).to.equal('<p> This product is out of stock.</p>')
                     done()
                 })
         })
@@ -368,11 +368,11 @@ describe('Product Testing', function () {
                 .end(function (err, res) {
                     expect(err).to.be.null
                     expect(res.body).to.be.an('object')
-                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'price', 'amount', 'featured_image'])
+                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'price', 'quantity', 'featured_image', 'createdAt', 'updatedAt'])
                     expect(res.body.name).to.equal(updatedProduct.name)
                     expect(res.body.description).to.equal(createdProduct.description)
                     expect(res.body.price).to.equal(createdProduct.price)
-                    expect(res.body.amount).to.equal(createdProduct.amount)
+                    expect(res.body.quantity).to.equal(createdProduct.quantity)
                     expect(res.body.featured_image).to.equal(createdProduct.featured_image)
                     done()
                 })
@@ -401,7 +401,6 @@ describe('Product Testing', function () {
         })
 
         it('should error delete product: Unauthorized process.; Not an admin', function (done) {
-
             chai
                 .request(app)
                 .delete(`/products/${createdProduct}`)
@@ -420,7 +419,6 @@ describe('Product Testing', function () {
         })
 
         it('should success delete product', function (done) {
-
             chai
                 .request(app)
                 .delete(`/products/${createdProduct._id}`)
@@ -428,7 +426,7 @@ describe('Product Testing', function () {
                 .end(function (err, res) {
                     expect(err).to.be.null
                     expect(res).to.be.an('object')
-                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'price', 'amount', 'featured_image'])
+                    expect(res.body).to.have.all.keys(['_id', 'name', 'description', 'price', 'quantity', 'featured_image', 'createdAt', 'updatedAt'])
                     expect(res).to.have.status(200)
                     done()
 

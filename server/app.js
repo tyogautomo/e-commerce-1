@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000
 const {
     errorHandler
 } = require('./middlewares/errorHandler')
-mongoose.connect('mongodb://localhost/e-commerce-2-testDB', {
+mongoose.connect('mongodb://localhost/e-commerce-2-testing', {
     useNewUrlParser: true,
     useFindAndModify: false
 }).then(() => {

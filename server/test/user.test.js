@@ -54,7 +54,7 @@ describe('User Testing', function () {
                 .end(function (err, res) {
                     expect(res.body).to.have.keys(['code', 'message'])
                     expect(res.body.code).to.equal(400)
-                    expect(res.body.message).to.equal("User validation failed: username: Path `username` is required.")
+                    expect(res.body.message).to.equal("<p> Path `username` is required.</p>")
                     expect(res).to.have.status(400)
                     done()
                 })
