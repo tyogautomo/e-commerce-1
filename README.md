@@ -415,3 +415,330 @@ All the products API need token headers
       "message": "Not found."
     }
     ```
+
+## Carts
++ ### Get Authenticated User Cart (Unpaid)
+  method: `GET`<br>
+  endpoint: `/carts`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return unpaid authenticated user cart"
+    {
+        _id: ObjectId,
+        userId: ObjectId,
+        products: [ObjectId],
+        paymentStatus: false,
+        deliveryStatus: false,
+        createdAt: Date,
+        updatedAt: Date
+    }
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 404
+    ```javascript
+    {
+      "code": 404,
+      "message": "Not found."
+    }
+    ```
+
++ ### Get All Users Transaction (Paid)
+  method: `GET`<br>
+  endpoint: `/carts/allusers`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return paid users transactions"
+    [
+      {
+          _id: ObjectId,
+          userId: ObjectId,
+          products: [ObjectId],
+          paymentStatus: true,
+          deliveryStatus: false,
+          createdAt: Date,
+          updatedAt: Date
+      },
+      ....
+    ]
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 404
+    ```javascript
+    {
+      "code": 404,
+      "message": "Not found."
+    }
+    ```
+
++ ### Get Arrived Users Transactions (Arrived User Transactions)
+  method: `GET`<br>
+  endpoint: `/carts/arrived`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return arrived users transactions"
+    [
+      {
+          _id: ObjectId,
+          userId: ObjectId,
+          products: [ObjectId],
+          paymentStatus: true,
+          deliveryStatus: true,
+          createdAt: Date,
+          updatedAt: Date
+      },
+      ....
+    ]
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 404
+    ```javascript
+    {
+      "code": 404,
+      "message": "Not found."
+    }
+    ```
+
++ ### Get Ongoing Users Transactions (Not Arrived User Transactions)
+  method: `GET`<br>
+  endpoint: `/carts/ongoing`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return ongoing users transactions"
+    [
+      {
+          _id: ObjectId,
+          userId: ObjectId,
+          products: [ObjectId],
+          paymentStatus: true,
+          deliveryStatus: false,
+          createdAt: Date,
+          updatedAt: Date
+      },
+      ....
+    ]
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 404
+    ```javascript
+    {
+      "code": 404,
+      "message": "Not found."
+    }
+    ```
+
++ ### Create Cart
+  method: `POST`<br>
+  endpoint: `/carts`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+  * body:
+    ```javascript
+    {
+      products: [ObjectId]
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return new user cart"
+    {
+        _id: ObjectId,
+        userId: ObjectId,
+        products: [ObjectId],
+        paymentStatus: false,
+        deliveryStatus: false,
+        createdAt: Date,
+        updatedAt: Date
+    }
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 400
+    ```javascript
+    {
+      "code": 400,
+      "message": "Products required."
+    }
+    ```
+
++ ### Increase/ Decrease Authenticated User Cart
+  method: `PUT`<br>
+  endpoint: `/carts/:cartId`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+  * params:
+    ```javascript
+    {
+      cartId: ObjectId
+    }
+    ```
+  * body
+    ```javascript
+    {
+      type: <"increase" || "decrease">
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return updated users cart"
+    {
+        _id: ObjectId,
+        userId: ObjectId,
+        products: [ObjectId],
+        paymentStatus: false,
+        deliveryStatus: false,
+        createdAt: Date,
+        updatedAt: Date
+    }
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 404
+    ```javascript
+    {
+      "code": 404,
+      "message": "Not found."
+    }
+    ```
+
++ ### Checkout User Cart
+  method: `PUT`<br>
+  endpoint: `/carts/checkout/:cartId`
+  
+  #### _Request_ :
+  * headers: 
+    ```javascript
+    {
+        token: <JWT Token>
+    }
+    ```
+  * params:
+    ```javascript
+    {
+      cartId: ObjectId
+    }
+    ```
+  * body
+    ```javascript
+    {
+      products: [ObjectId]
+    }
+    ```
+    
+  #### _Response_ :
+  - 200
+    ```javascript
+    "Return updated users cart (paid)"
+    {
+        _id: ObjectId,
+        userId: ObjectId,
+        products: [ObjectId],
+        paymentStatus: true,
+        deliveryStatus: false,
+        createdAt: Date,
+        updatedAt: Date
+    }
+    ```
+  - 401
+    ```javascript
+    {
+      "code": 401,
+      "message": "Unauthorized Process."
+    }
+    ```
+  - 404
+    ```javascript
+    {
+      "code": 404,
+      "message": "Not found."
+    }
+    ```
