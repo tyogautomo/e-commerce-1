@@ -8,12 +8,26 @@ http://localhost:3000
 ```
 
 Deployed Web URL:
-[http://cubes.yogautomo.com](http://cubes.yogautomo.com)
+[http://cubes.yogautomo.com](http://cubes.yogautomo.com)<br/>
+Sorry if this domain is currently doesnt work because I didnt extend the domain
 
 ## Index of Reference:
+* [Screenshots]()
 * [Users]()
 * [Products]()
 * [Carts]()
+
+## Screenshots
+1. Home
+![Home](https://i.ibb.co/Scr0pHh/Screen-Shot-2020-03-12-at-13-23-04.png)
+2. Home
+![Home](https://i.ibb.co/47W28x3/Screen-Shot-2020-03-12-at-13-23-21.png)
+3. Prodcut Detail
+![Detail](https://i.ibb.co/r7gYcLT/Screen-Shot-2020-03-12-at-13-23-42.png)
+4. Transaction
+![Transaction](https://i.ibb.co/yYJzZCR/Screen-Shot-2020-03-12-at-13-23-58.png)
+5. Cart
+![Cart](https://i.ibb.co/2yb41sw/Screen-Shot-2020-03-12-at-13-24-25.png)
 
 ## Users API
 |  HTTP  | Endpoint | Headers | Body | Description | Reference |
